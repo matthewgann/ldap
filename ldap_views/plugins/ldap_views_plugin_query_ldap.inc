@@ -259,6 +259,10 @@ class ldap_views_plugin_query_ldap extends views_plugin_query {
       if (isset($entry['jpegphoto'])) {
         $entry['jpegphoto'][0] = "<img src='data:image/jpeg;base64," . base64_encode($entry['jpegphoto'][0]) . "' alt='photo' />";
       }
+      // Adding ability to add <img src='[attribute_10]' alt='photo' /> in the view.
+      else if (isset($entry['thumbnailphoto'])) {
+        $entry['thumbnailphoto'][0] = "data:image/jpeg;base64," . base64_encode($entry['thumbnailphoto'][0]);
+      }
       foreach ($view->field as $field) {
         if (! isset($field_alias[$field->field_alias])) {
           continue;
